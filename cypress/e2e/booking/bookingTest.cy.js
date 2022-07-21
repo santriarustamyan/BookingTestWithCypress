@@ -1,5 +1,6 @@
 import basePage from "/cypress/support/pages/basePage.js";
 import searchPage from "../../support/pages/searchPage";
+import assert from "../../support/pages/asserts";
 import {locationName} from "../../support/constantData";
 
 describe('search Dilijan', () => {
@@ -7,16 +8,18 @@ describe('search Dilijan', () => {
         basePage.goTo()
     })
     it('search ', function () {
-        basePage.whereAreGoing(locationName)
+        basePage.searchLocation(locationName)
+
+        basePage.selectDate()
+
+        basePage.increaseNumberOfAdults()
+
         basePage.clickSearchBtn()
 
-        searchPage.selectStartDate()
-        searchPage.selectEndDate()
-
-        searchPage.increaseNumberOfAdults()
-
-        searchPage.clickSearchBtn()
+        assert.verifyLocationsOnAllPages()
 
         searchPage.filterWithFourStars()
+
+        assert.verifyTheStars()
     })
 })
